@@ -63,4 +63,16 @@ title('TES Exponential');
 figure();
 histogram(corrExponential2,77,'Normalization','probability');
 title('TES Exponential 2');
+
+figure();
+autocorr(X, 20);
+title('Uncorrelated');
+
+figure();
+autocorr(corrExponential, 20);
+title('a=-b=0.1');
+
+figure();
+autocorr(corrExponential2, 20);
+title('a=-b=0.01');
     
