@@ -1,0 +1,44 @@
+clear all;
+close all;
+clc;
+
+lambda = 5
+U = xlsread('100K_uniform.xlsx'); %import unfiform random numbers
+
+X = ( -1 / lambda ) * log(1-U);
+
+
+figure();
+histogram(U,77,'Normalization','probability');
+title('Uniform Random Variable Input');
+
+figure();
+histogram(X,77,'Normalization','probability');
+title('Exponential Random Variable');
+
+V = -0.1 + (0.2).*U;
+
+i = 2;
+CorrX = zeros(1, 100000);
+CorrX(1) = U(1);
+while i <= 99999
+    CorrX(i) = mod((CorrX(i-1) + V(i)), 1);
+    i = i + 1;
+end
+
+Stitched = zeroes(1,100000);
+i = 1;
+while i <= 100000
+    if CorrX(i) <= 0.7
+        Stitched(i) = CorrX(i)/0.7
+    else
+        Stitched(i) = 1 - CorrX(i))
+    end
+end
+
+
+figure();
+histogram(CorrX,77,'Normalization','probability');
+title('New random  variable');
+
+    
